@@ -32,6 +32,8 @@ def main():
 						help="Path to the input .wav file (default: data/test.wav)")
 	parser.add_argument("--trans_file", type=str, default="data/test.txt",
 						help="Path to the input transcript .txt file (default: data/test.txt)")
+	parser.add_argument("--output_dir", type=str, default="result",
+						help="Path to the output directory")
 	parser.add_argument("--debug", action="store_true", help="啟用除錯模式")
 
 	args = parser.parse_args()
@@ -41,7 +43,8 @@ def main():
 	trans_file = args.trans_file
 	DEBUG = args.debug
 	dir_name = "result-[" + os.path.splitext(os.path.basename(wav_file))[0] + "]"
-	output_dir = os.path.join(os.path.dirname(wav_file), dir_name)
+	output_dir = args.output_dir
+	output_dir = os.path.join(output_dir, dir_name)
 	debug_dir = os.path.join(output_dir, 'metadata')
 	os.makedirs(output_dir, exist_ok=True)
 	os.makedirs(debug_dir, exist_ok=True)
