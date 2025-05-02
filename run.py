@@ -35,6 +35,7 @@ def main():
 	parser.add_argument("--output_dir", type=str, default="result",
 						help="Path to the output directory")
 	parser.add_argument("--debug", action="store_true", help="啟用除錯模式")
+	parser.add_argument("--extra_params", type=str, default="", help="MFA執行ALIGN時的額外參數")
 
 	args = parser.parse_args()
 
@@ -52,9 +53,10 @@ def main():
 
 	# align wav and transcription
 	align_one_cmd, output_file = utils.get_MFA_align_one_cmd(wav_file, trans_file, output_dir, DICTIONARY, ACOUSTIC_MODEL)
+	align_one_cmd += " " + args.extra_params
 	utils.shell(align_one_cmd)
 
-
+	
 
 	##############################################################################
 	##############################################################################
